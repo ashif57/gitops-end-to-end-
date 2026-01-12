@@ -13,10 +13,7 @@ document.querySelector('#app').innerHTML = `
       <p>App Name: <span class="env-value">${appName}</span></p>
       <p>API URL: <span class="env-value">${apiUrl}</span></p>
       
-      <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-        <h3>Backend Integration</h3>
-        <p>Message: <span id="backend-msg" class="env-value" style="color: #ffd700;">Loading...</span></p>
-      </div>
+      <h1>Before push </h1>
 
       <div style="margin-top: 2rem; text-align: left; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">
         <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: #fff;">Code specific:</p>
