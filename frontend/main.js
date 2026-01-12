@@ -2,8 +2,9 @@ import './style.css'
 
 // Access environment variables using import.meta.env
 // Note: In Vite, variables must be prefixed with VITE_ to be exposed to the frontend
-const appName = import.meta.env.VITE_APP_NAME
-const apiUrl = import.meta.env.VITE_API_BASE_URL
+// We use window.env for runtime variable injection (Kubernetes) and fallback to import.meta.env (local dev/build time)
+const appName = window.env?.VITE_APP_NAME || import.meta.env.VITE_APP_NAME
+const apiUrl = window.env?.VITE_API_BASE_URL || import.meta.env.VITE_API_BASE_URL
 
 document.querySelector('#app').innerHTML = `
   <div>
