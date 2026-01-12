@@ -16,9 +16,17 @@ spec:
           image: {{.Values.image.repository}}:{{.Values.image.tag}}
           ports:
             - containerPort: 80
-          envFrom:
-            - configMapRef:
-                name: frontend-config
+          env: 
+            - name: VITE_API_BASE_URL
+              valueFrom: 
+                configMapKeyRef:
+                  name: frontend-config
+                  key: VITE_API_BASE_URL
+            - name: VITE_APP_NAME
+              valueFrom: 
+                configMapKeyRef:
+                  name: frontend-config
+                  key: VITE_APP_NAME
 ---
 apiVersion: v1
 kind: Service
