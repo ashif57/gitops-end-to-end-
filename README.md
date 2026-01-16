@@ -10,6 +10,8 @@
 
 ## 📖 Overview
 
+![Project Cover](screenshots/cover1.png)
+
 This repository hosts a full-stack application composed of a **React frontend** and a **Flask backend**, orchestrated via **Kubernetes** and managed through a **GitOps** workflow. Changes to the source code automatically trigger CI/CD pipelines that build Docker images, update Helm charts, and maintain the desired state of the application in the cluster.
 
 ---
@@ -72,7 +74,7 @@ The `cicd.yml` workflow acts as the automation engine:
 
 - **Containerization**: Docker (Multi-stage builds)
 - **Orchestration**: Kubernetes & Helm
-- **CI/CD**: GitHub Actions
+- **CI/CD**: GitHub Actions, ArgoCD
 - **Registry**: Docker Hub
 
 ---
@@ -180,5 +182,16 @@ The frontend utilizes a custom `nginx.conf` and `env.sh` script to ensure that:
 - **Distroless Backend**: The Python backend uses a Google Distroless image, removing shells and unnecessary binaries to reduce the attack surface.
 - **Alpine Nginx**: The frontend uses a lightweight Alpine image.
 - **Non-Root Users**: Best practices applied where possible.
+
+---
+
+## 📸 Screenshots
+
+|          Dashboard View           |         Deployment Status          |
+| :-------------------------------: | :--------------------------------: |
+| ![Dashboard](screenshots/sc1.png) | ![Deployment](screenshots/sc2.png) |
+|  ![Details](screenshots/sc3.png)  |   ![Graph](screenshots/sc4.png)    |
+|   ![Logs](screenshots/sc5.png)    |  ![Terminal](screenshots/sc6.png)  |
+|  ![Config](screenshots/sc7.png)   |  ![Settings](screenshots/sc8.png)  |
 
 ---
