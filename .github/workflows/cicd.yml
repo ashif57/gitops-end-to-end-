@@ -41,8 +41,19 @@ jobs:
         run: |
           IMAGE_TAG=${{ github.run_id }}
           docker build -t ${{ secrets.DOCKER_USERNAME }}/gitopsfront:$IMAGE_TAG frontend
-          docker push ${{ secrets.DOCKER_USERNAME }}/gitopsfront:$IMAGE_TAG
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Trivy Image Scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/gitopsfront:${{ github.run_id }}
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: 1
+
+      - name: Push Frontend Image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/gitopsfront:$IMAGE_TAG
       - name: Update Helm values (frontend)
         run: |
           sudo snap install yq
@@ -70,8 +81,19 @@ jobs:
         run: |
           IMAGE_TAG=${{ github.run_id }}
           docker build -t ${{ secrets.DOCKER_USERNAME }}/gitopsback:$IMAGE_TAG backend
-          docker push ${{ secrets.DOCKER_USERNAME }}/gitopsback:$IMAGE_TAG
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
+      - name: Trivy Image Scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/gitopsback:${{ github.run_id }}
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: 1
+
+      - name: Push Backend Image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/gitopsback:$IMAGE_TAG
       - name: Update Helm values (backend)
         run: |
           sudo snap install yq
